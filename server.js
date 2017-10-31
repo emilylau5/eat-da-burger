@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
-var port = process.env.PORT || 3036;
+var port = process.env.PORT || 3050;
 
 var app = express();
 
@@ -18,4 +18,6 @@ var routes = require("./controllers/burgers_controller.js");
 
 app.use("/", routes);
 
-app.listen(port);
+app.listen(port, function () {
+  console.log("yess")
+  });
