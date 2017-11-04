@@ -5,6 +5,10 @@ var router = express.Router();
 var burger = require("../models/burger.js");
 
 router.get("/", function(req, res) {
+  res.redirect("/burgers");
+});
+
+router.get("/burgers", function(req, res) {
   burger.all(function(data) {
     var hbsObject = {
       burger: data
@@ -14,26 +18,22 @@ router.get("/", function(req, res) {
   });
 });
 
-router.post("/api/burger", function(req, res) {
+router.post("/create/burger", function(req, res) {
   burger.create([
     "name", "devoured"
   ], [
-    req.body.burger_name, req.body.devoured
+    req.body.burger_name, false
   ], function(result) {
     // Send back the ID of the new quote
     res.json({result});
   });
 }); 
 
-router.put("/api/burger", function(req, res) {
-  console.log(req.body.data)
-  burger.update(
-   "devoured = true"
-   , 
-   "id = " + req.body.data
-   , function(result) {
-    res.json({result})
-   })
+router.put("/burgers/update", function(req, res) {
+  burger.update(req.body.burger_id, function(result) {
+    console.log(result);
+    res.redirect("/");
+  });
 });
-
+ 
 module.exports = router;

@@ -6,14 +6,14 @@ $(function(){
       burger_name: $("#burg-name").val().trim(),
       devoured: $("[name=devoured]:checked").val().trim()
     }
-    $.post("/api/burger", newBurg, function(){
+    $.post("/create/burger", newBurg, function(){
       location.reload();
     })
   })
   $(document).on("click", ".devour", function(){
     var devourID = $(this).attr("data-id")
     console.log(devourID)
-    $.ajax("/api/burger/", {
+    $.ajax("/update/burger/", {
       type: "PUT",
       data: devourID
     }).then(
