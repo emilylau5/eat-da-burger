@@ -4,18 +4,19 @@ $(function(){
   $("#add-burger").on("click", function(){
     var newBurg = {
       burger_name: $("#burg-name").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
     }
+    console.log(newBurg)
     $.post("/create/burger", newBurg, function(){
       location.reload();
     })
   })
   $(document).on("click", ".devour", function(){
     var devourID = $(this).attr("data-id")
-    console.log(devourID)
+    console.log("new one: " + devourID)
     $.ajax("/update/burger/", {
       type: "PUT",
-      data: devourID
+      data: {
+        id: devourID}
     }).then(
       function() {
         

@@ -19,20 +19,19 @@ router.get("/burgers", function(req, res) {
 });
 
 router.post("/create/burger", function(req, res) {
-  burger.create([
-    "name", "devoured"
-  ], [
-    req.body.burger_name, false
-  ], function(result) {
+  burger.create(
+    req.body.burger_name
+  , function(result) {
     // Send back the ID of the new quote
-    res.json({result});
+    res.json(true);
   });
 }); 
 
-router.put("/burgers/update", function(req, res) {
-  burger.update(req.body.burger_id, function(result) {
-    console.log(result);
-    res.redirect("/");
+router.put("/update/burger", function(req, res) {
+  console.log(req.body)
+  burger.update(req.body.id, function(result) {
+    // console.log(result);
+    res.json(true);
   });
 });
  
